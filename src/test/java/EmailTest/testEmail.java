@@ -69,7 +69,6 @@ public class testEmail {
 				  	log.info(path);
 				  	final File folder = new File(path);
 				  	log.info("folderName-"+folder.getName());
-				  	log.info(folder.length());
 				  	File[] files = folder.listFiles();
 		    		int len = files.length;
 		    		log.info("files Lenght "+ len);
