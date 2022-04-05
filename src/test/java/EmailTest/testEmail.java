@@ -74,11 +74,7 @@ public class testEmail {
 		    		log.info("files Lenght "+ len);
 		    		for ( final File file : files ) {
 		    			log.info(file.getAbsoluteFile());
-		    			file.delete();
 		    		 	}
-		    		File[] files1 = folder.listFiles();
-		    		int len1 = files1.length;
-		    		log.info("files Lenght "+ len1);
 			 		} catch (Exception e)	{
 	    				log.info("Exception while taking screenshot "+e.getMessage());
 	    		} 
