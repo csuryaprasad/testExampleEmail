@@ -59,12 +59,12 @@ public class testEmail {
 		 if(ITestResult.FAILURE==result.getStatus())   	{
 			 try {
 				 	log.info("connected to the Linux ENV");
-				 	//TakesScreenshot ts=(TakesScreenshot)driver;
-				  	//File source=ts.getScreenshotAs(OutputType.FILE);
-				  	//log.info("screen shot "+source);
-				  	//log.info(result.getName());
-					//FileHandler.copy(source, new File("./test-output/"+result.getName()+"12.png"));
-					//log.info("Screenshot taken");
+				 	TakesScreenshot ts=(TakesScreenshot)driver;
+				  	File source=ts.getScreenshotAs(OutputType.FILE);
+				  	log.info("screen shot "+source);
+				  	log.info(result.getName());
+					FileHandler.copy(source, new File("./test-output/"+result.getName()+"12.png"));
+					log.info("Screenshot taken");
 					String path = System.getProperty("user.dir")+"//test-output";
 				  	log.info(path);
 				  	final File folder = new File(path);
