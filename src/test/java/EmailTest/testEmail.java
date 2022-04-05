@@ -63,10 +63,9 @@ public class testEmail {
 				  	File source=ts.getScreenshotAs(OutputType.FILE);
 				  	log.info("screen shot "+source);
 				  	log.info(result.getName());
-					FileHandler.copy(source, new File("./test-output/"+result.getName()+"12.png"));
-					log.info("Screenshot taken");
-					String path = System.getProperty("user.dir")+"\\test-output";
+				  	String path = System.getProperty("user.dir")+"\\test-output";
 				  	log.info(path);
+					FileHandler.copy(source, new File(path+"\\"+result.getName()+"12.png"));
 				  	final File folder = new File(path);
 				  	log.info("folderName-"+folder.getName());
 				  	log.info(folder.length());
