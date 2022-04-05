@@ -51,15 +51,26 @@ public class testEmail {
 	        Assert.assertTrue(driver.getCurrentUrl().contains("secure"));
 	    }
 	 
+	 
+ 
+     
 	 @AfterMethod
 	 public void tearDown(ITestResult result)   {
 		 if(ITestResult.FAILURE==result.getStatus())   	{
 			 try {
- 				TakesScreenshot ts=(TakesScreenshot)driver;
- 				File source=ts.getScreenshotAs(OutputType.FILE);
+				 	log.info("connected to the Linux ENV");
+			  		String currentUser=System.getProperty("user.name");
+				  	log.info(currentUser);
+				  	TakesScreenshot ts=(TakesScreenshot)driver;
+				  	File source=ts.getScreenshotAs(OutputType.FILE);
+				  	log.info(result.getName());
 					FileHandler.copy(source, new File("./test-output/"+result.getName()+".png"));
 					log.info("Screenshot taken");
-	    			} catch (Exception e)	{
+					String path = System.getProperty("user.dir")+"\\test-output";
+				  	log.info(path);
+				  	final File folder = new File(path);
+				  	log.info("folderName-"+folder.getName());
+			 		} catch (Exception e)	{
 	    				log.info("Exception while taking screenshot "+e.getMessage());
 	    		} 
 	    	}
