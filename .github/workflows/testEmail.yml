@@ -1,0 +1,86 @@
+# This workflow uses actions that are not certified by GitHub.
+# They are provided by a third-party and are governed by
+# separate terms of service, privacy policy, and support
+# documentation.
+# This workflow will build a Java project with Gradle and cache/restore any dependencies to improve the workflow execution time
+# For more information see: https://help.github.com/actions/language-and-framework-guides/building-and-testing-java-with-gradle
+
+name: TestEmail
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    outputs:
+      build_number: ${{ steps.buildnumber.outputs.build_number }}
+    steps:
+    - name: Generate build number
+      id: buildnumber
+      uses: einaregilsson/build-number@v3
+      with:
+        token: ${{secrets.github_token}}        
+    - name: Print new build number
+      run: echo "Build number is $BUILD_NUMBER"
+
+    - name: Output the branch name
+      run: echo $(echo $GITHUB_REF | cut -d'/' -f 3)
+ 
+    - uses: actions/checkout@v2
+    - name: Set up Java
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+        distribution: 'adopt'
+        cache: gradle
+    
+    - name: Grant execute permission for gradlew
+      run: chmod +x gradlew
+      
+    - name: Install Google Chrome # Using shell script to install Google Chrome
+      run: 
+          chmod +x ./scripts/InstallChrome.sh
+        ./scripts/InstallChrome.sh
+  
+    - name: Run Tests
+      run: ./gradlew test --info # Run our tests using Gradle
+
+    - name: Test Report
+      uses: dorny/test-reporter@v1
+      if: success() || failure()    # run this step even if previous step failed
+      with:
+          name: Run Tests            # Name of the check run which will be created
+          path: build/test-results/test/TEST-*.xml    # Path to test results
+          reporter: java-junit
+   
+    - name: Send mail
+      uses: dawidd6/action-send-mail@v3
+      if: failure()
+      with:
+        # Required mail server address:
+        server_address: smtp.gmail.com
+        # Required mail server port:
+        server_port: 465
+        # user credentials
+        username: ${{secrets.EMAIL_USERNAME}}
+        password: ${{secrets.EMAIL_PASSWORD}}
+        # email subject
+        subject: Build is unstable ${{github.repository}} -${{github.run_id}}
+        body: 
+          See <${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}> 
+        # send email to
+        to: vig92007@gmail.com,csuryaprasad@gmail.com
+        # from email name
+        from: Email Build Actions
+        # Optional unsigned/invalid certificates allowance:
+        ignore_cert: true
+        # Optional converting Markdown to HTML (set content_type to text/html too):
+        convert_markdown: true
+        # Optional attachments:
+        attachments: test-output/userLogin.png
+        # Optional priority: 'high', 'normal' (default) or 'low'
+        priority: low
