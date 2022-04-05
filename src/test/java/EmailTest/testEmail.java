@@ -63,9 +63,10 @@ public class testEmail {
 				  	File source=ts.getScreenshotAs(OutputType.FILE);
 				  	log.info("screen shot "+source);
 				  	log.info(result.getName());
-				  	String path = System.getProperty("user.dir")+"\\test-output";
+					//FileHandler.copy(source, new File("./test-output/"+result.getName()+"12.png"));
+					//log.info("Screenshot taken");
+					String path = System.getProperty("user.dir")+"\\test-output";
 				  	log.info(path);
-					FileHandler.copy(source, new File(path+"\\"+result.getName()+"12.png"));
 				  	final File folder = new File(path);
 				  	log.info("folderName-"+folder.getName());
 				  	log.info(folder.length());
@@ -73,8 +74,8 @@ public class testEmail {
 		    		int len = files.length;
 		    		log.info("files Lenght "+ len);
 		    		for ( final File file : files ) {
-		    			log.info(file.getPath());
-		    		 }	
+		    			log.info(file.getAbsoluteFile());
+		    		 	}	
 			 		} catch (Exception e)	{
 	    				log.info("Exception while taking screenshot "+e.getMessage());
 	    		} 
