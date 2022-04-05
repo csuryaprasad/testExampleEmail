@@ -44,7 +44,7 @@ public class testEmail {
 	        WebElement usernameTxt = driver.findElement(By.id("username"));
 	        usernameTxt.sendKeys("tomsmith");
 	        WebElement passwordTxt = driver.findElement(By.id("password"));
-	        passwordTxt.sendKeys("SuperSecretPassword!111");
+	        passwordTxt.sendKeys("SuperSecretPassword!");
 	        WebElement submitBtn = driver.findElement(By.className("radius"));
 	        submitBtn.click();
 	        log.info("Current URL is:" + driver.getCurrentUrl());
