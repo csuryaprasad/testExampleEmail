@@ -71,7 +71,7 @@ public class testEmail {
 				  	log.info("folderName-"+folder.getName());
 				  	File[] files = folder.listFiles();
 		    		int len = files.length;
-		    		log.info("files Lenght "+ len);
+		    		log.info("files total Lenght "+ len);
 		    		for ( final File file : files ) {
 		    			log.info(file.getAbsoluteFile());
 		    		 	}
