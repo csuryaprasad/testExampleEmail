@@ -59,17 +59,23 @@ public class testEmail {
 		 if(ITestResult.FAILURE==result.getStatus())   	{
 			 try {
 				 	log.info("connected to the Linux ENV");
-			  		String currentUser=System.getProperty("user.name");
-				  	log.info(currentUser);
-				  	TakesScreenshot ts=(TakesScreenshot)driver;
+				 	TakesScreenshot ts=(TakesScreenshot)driver;
 				  	File source=ts.getScreenshotAs(OutputType.FILE);
+				  	log.info("screen shot "+source);
 				  	log.info(result.getName());
-					FileHandler.copy(source, new File("./test-output/"+result.getName()+".png"));
+					FileHandler.copy(source, new File("./test-output/"+result.getName()+"12.png"));
 					log.info("Screenshot taken");
 					String path = System.getProperty("user.dir")+"\\test-output";
 				  	log.info(path);
 				  	final File folder = new File(path);
 				  	log.info("folderName-"+folder.getName());
+				  	log.info(folder.length());
+				  	File[] files = folder.listFiles();
+		    		int len = files.length;
+		    		log.info("files Lenght "+ len);
+		    		for ( final File file : files ) {
+		    			log.info(file.getPath());
+		    		 }	
 			 		} catch (Exception e)	{
 	    				log.info("Exception while taking screenshot "+e.getMessage());
 	    		} 
