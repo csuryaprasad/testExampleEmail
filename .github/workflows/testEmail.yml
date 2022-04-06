@@ -66,8 +66,8 @@ jobs:
         # Required mail server port:
         server_port: 465
         # user credentials
-        username: ${{secrets.EMAIL_USERNAME}}
-        password: ${{secrets.EMAIL_PASSWORD}}
+        username: csuryaprasad@gmail.com
+        password: Sree#1973
         # email subject
         subject: Build is unstable ${{github.repository}} -${{github.run_id}}
         body: 
