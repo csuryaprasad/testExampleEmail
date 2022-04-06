@@ -48,7 +48,7 @@ public class testEmail {
 	        WebElement submitBtn = driver.findElement(By.className("radius"));
 	        submitBtn.click();
 	        log.info("Current URL is:" + driver.getCurrentUrl());
-	        Assert.assertTrue(driver.getCurrentUrl().contains("secure"));
+	        Assert.assertTrue(driver.getCurrentUrl().contains("wwwwwsecureddddddd"));
 	    }
 	 
 	 
